@@ -1,0 +1,168 @@
+Dfs- recursive and iterative
+
+bfs- iterative 
+
+Construct a binary from in order and Construct a binary from in order and post order
+
+Construct a binary from Pre order and post order
+
+Search an element In a binary tree
+
+To Invert a binary tree
+
+Maximum depth or height of a binary tree
+
+Check if two trees are identical or not
+
+Find a diameter of a binary tree
+
+To check if a tree is bst or not
+
+K th smallest element in a binary tree
+
+
+
+Lowest common ancestor of a binary tree
+
+
+
+
+
+
+
+
+
+Here is a curated list of 50 binary tree and binary search tree (BST) questions, ranging from basic to advanced. Solving these will help you master the topic.
+
+
+
+Basic-Level Questions
+
+1. What is a binary tree? What are the different types of binary trees?
+
+2. Write a program to implement the insertion and traversal (Inorder, Preorder, Postorder) of a binary tree.
+
+3. Write a program to implement level-order traversal of a binary tree (BFS).
+
+4. Write a program to find the height of a binary tree.
+
+5. Write a program to count the total number of nodes in a binary tree.
+
+6. Write a program to count the number of leaf nodes in a binary tree.
+
+7. Write a program to find the diameter (longest path) of a binary tree.
+
+8. What is a complete binary tree? How can it be implemented using arrays?
+
+9. Write a program to check if a binary tree is balanced.
+
+10. Write a program to find the maximum and minimum values in a binary tree.
+
+
+
+Intermediate-Level Questions
+
+11. Write a program to check if two binary trees are identical.
+
+12. Write a program to print the boundary nodes of a binary tree (Boundary Traversal).
+
+13. Write a program to find the lowest common ancestor (LCA) of two nodes in a binary tree.
+
+14. Write a program to check if a binary tree is symmetric.
+
+15. Write a program to convert a binary tree into its mirror.
+
+16. Write a program to find all root-to-leaf paths in a binary tree.
+
+17. Write a program to find the sum of all nodes at a given level in a binary tree.
+
+18. Write a program to check if a binary tree is a Binary Search Tree (BST).
+
+19. Write a program to find the kth smallest/largest element in a BST.
+
+20. Write a program to find the inorder successor and predecessor of a given node in a BST.
+
+
+
+Advanced-Level Questions
+
+21. Write a program to flatten a binary tree to a linked list in preorder traversal order.
+
+22. Write a program to convert a binary tree to its sum tree.
+
+23. Write a program to find the vertical order traversal of a binary tree.
+
+24. Write a program to implement a depth-first search (DFS) algorithm in a binary tree.
+
+25. Write a program to implement a breadth-first search (BFS) algorithm in a binary tree.
+
+26. Write a program to construct a binary tree from given inorder and preorder traversals.
+
+27. Write a program to construct a binary tree from given inorder and postorder traversals.
+
+28. Write a program to delete a node in a BST.
+
+29. Write a program to find all paths in a binary tree that sum to a given value.
+
+30. Write a program to check if a binary tree is height-balanced using the bottom-up approach.
+
+
+
+Expert-Level Questions
+
+31. Write a program to implement Morris traversal (Inorder without recursion and stack).
+
+32. Write a program to find the distance between two nodes in a binary tree.
+
+33. Write a program to print the diagonal traversal of a binary tree.
+
+34. Write a program to print the zigzag traversal of a binary tree (spiral order).
+
+35. Write a program to check if a binary tree is a subtree of another binary tree.
+
+36. Write a program to serialize and deserialize a binary tree.
+
+37. Write a program to print the top view of a binary tree.
+
+38. Write a program to print the bottom view of a binary tree.
+
+39. Write a program to find the width of a binary tree at each level.
+
+40. Write a program to find the maximum path sum between two nodes in a binary tree.
+
+
+
+Hardest-Level Questions
+
+41. Write a program to convert a BST to a doubly linked list.
+
+42. Write a program to convert a normal BST into a balanced BST.
+
+43. Write a program to find the largest BST subtree in a binary tree.
+
+44. Write a program to find the median of a BST (in O(h) space).
+
+45. Write a program to check if a binary tree is a valid Complete Binary Tree.
+
+46. Write a program to merge two binary search trees.
+
+47. Write a program to count the number of subtrees in a binary tree that have all equal values.
+
+48. Write a program to find the maximum sum BST subtree in a binary tree.
+
+49. Write a program to find the number of unique BSTs that can be formed with n nodes (Catalan Number problem).
+
+50. Write a program to implement the AVL tree and perform insertions and deletions while maintaining balance.
+
+
+
+Tips for Solving These Questions:
+
+1. Focus on writing clean and optimized code.
+
+2. Understand recursion and iterative approaches thoroughly.
+
+3. Solve the problems in increasing difficulty order to build a strong foundation.
+
+4. Use tools like LeetCode, GeeksforGeeks, or HackerRank to practice.
+
