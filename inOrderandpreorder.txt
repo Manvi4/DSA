@@ -1,0 +1,82 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    public TreeNode(int val)
+    {
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+}
+
+public class Identical{
+  
+  private static int preorderindex=0;
+  
+  public static TreeNode InorPre(int[] inorder, int[] preorder, int instart, int inend)
+  {
+      if(instart>inend)
+       return null;
+       TreeNode root= new TreeNode(preorder[preorderindex++]);
+       if(instart==inend)
+       return root;
+       
+       int findrootbyindex= FindrootByIndex(inorder, instart, inend, root.val);
+       root.left= InorPre(inorder, preorder, instart, findrootbyindex-1);
+       root.right= InorPre(inorder, preorder, findrootbyindex+1, inend);
+       
+       return root;
+       
+     
+  }
+   public static int FindrootByIndex(int[] inorder, int instart, int inend, int val)
+      {
+          for(int i=instart;i<inend;i++)
+          {
+              if(inorder[i]==val)
+              {
+                  return i;
+              }
+          }
+          return -1;
+      }
+      public static void levelOrderBinaryTree(TreeNode root)
+      {
+          if(root==null)
+          {
+             return;
+          }
+          
+          Queue<TreeNode> queue= new LinkedList<>();
+          queue.add(root);
+          
+          while(!queue.isEmpty())
+          {
+              TreeNode current=queue.poll();
+              System.out.print(current.val + " ");
+              if(current.left!=null){
+                  queue.add(current.left);
+              }
+              if(current.right!=null){
+                  queue.add(current.right);
+              }
+          }
+      }
+   
+     public static void main(String []args){
+         
+        TreeNode root = new TreeNode(1);
+        int[] inorder={4,2,5,1,6,3,7};
+        int[] preorder={1,2,4,5,3,6,7};
+        
+        
+        TreeNode root1= InorPre(inorder, preorder, 0, inorder.length-1);
+        levelOrderBinaryTree(root1);
+        
+         
+     }
+}

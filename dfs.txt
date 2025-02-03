@@ -1,0 +1,120 @@
+Recursive DFS: Uses the call stack to handle the traversal.
+Iterative DFS: Uses an explicit stack data structure to simulate the recursion.
+DFS is an algorithm used to traverse or search through a tree or graph data structure. The goal is to start at a specific node (usually the root) and explore as far as possible along each branch before backtracking. It can be implemented in two ways:
+
+DFS is typically used to solve problems like:
+
+Pathfinding.
+Detecting cycles in a graph.
+Topological sorting.
+Connected components in a graph.
+
+
+recursive approach
+
+class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    public TreeNode(int val)
+    {
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+}
+
+public class Dfs{
+  
+  public void dfsImplementation(TreeNode node){
+      
+      if(node==null)
+      return;
+      
+      System.out.println(node.val+ " ");
+      dfsImplementation(node.left);
+      dfsImplementation(node.right);
+      
+      
+  }
+
+     public static void main(String []args){
+         
+         TreeNode root= new TreeNode(1);
+         root.left=new TreeNode(2);
+         root.right=new TreeNode(3);
+         root.left.left=new TreeNode(4);
+         root.left.right=new TreeNode(5);
+         root.right.left=new TreeNode(6);
+         root.right.right=new TreeNode(7);
+         Dfs d= new Dfs();
+         d.dfsImplementation(root);
+         
+         
+        System.out.println("recursive implementation");
+     }
+}
+
+
+Iterative approach
+
+import java.util.Stack; 
+class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    public TreeNode(int val)
+    {
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+}
+
+public class Dfs{
+  
+  public void dfsImplementation(TreeNode root){
+      
+      if(root==null)
+      return;
+      
+      Stack<TreeNode> stack= new Stack<>();
+      stack.push(root);
+      
+      while(!stack.isEmpty())
+      {
+          TreeNode current= stack.pop();
+          System.out.println(current.val);
+          
+          if(current.right!=null)
+          {
+              stack.push(current.right);
+          }
+          if(current.left!=null)
+          {
+              stack.push(current.left);
+          }
+          
+      }
+      
+      
+  }
+
+     public static void main(String []args){
+         
+         TreeNode root= new TreeNode(1);
+         root.left=new TreeNode(2);
+         root.right=new TreeNode(3);
+         root.left.left=new TreeNode(4);
+         root.left.right=new TreeNode(5);
+         root.right.left=new TreeNode(6);
+         root.right.right=new TreeNode(7);
+         Dfs d= new Dfs();
+         d.dfsImplementation(root);
+         
+         
+        System.out.println("recursive implementation");
+     }
+}

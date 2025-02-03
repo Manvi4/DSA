@@ -1,0 +1,46 @@
+/* Online Java Compiler and Editor */
+/* Online Java Compiler and Editor */
+import java.util.*;
+class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    public TreeNode(int val)
+    {
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+}
+
+public class Identical{
+  
+ 
+  public static int checkHeight(TreeNode root)
+  {
+      if(root==null)
+       return 0;
+       
+      if(root.left==null&&root.right==null)
+      return 1;
+      
+      return checkHeight(root.left) + checkHeight(root.right);
+  }
+ 
+     public static void main(String []args){
+         
+        TreeNode root = new TreeNode(1);
+        root.left= new TreeNode(2);
+        root.right= new TreeNode(3);
+        root.left.left= new TreeNode(4);
+        root.left.right= new TreeNode(5);
+        root.right.left= new TreeNode(10);
+        
+        int b =checkHeight(root);
+
+        System.out.println(b);
+
+         
+     }
+}

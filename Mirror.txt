@@ -1,0 +1,77 @@
+/* Online Java Compiler and Editor */
+/* Online Java Compiler and Editor */
+import java.util.*;
+class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    public TreeNode(int val)
+    {
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+}
+
+public class Mirror{
+  
+ 
+  public static TreeNode mirror(TreeNode root)
+  {
+      if(root==null)
+       return null;
+       
+      TreeNode t= root.left;
+      root.left=root.right;
+      root.right=t;
+      
+      mirror(root.left);
+      mirror(root.right);
+      
+      return root; 
+  }
+ 
+ public static TreeNode levelOrder(TreeNode root)
+ {
+     if(root==null)
+     {
+         return null;
+     }
+     Queue<TreeNode> queue= new LinkedList<>();
+     queue.add(root);
+     
+     while(!queue.isEmpty())
+     {
+         TreeNode r= queue.poll();
+         System.out.println(r.val);
+         
+         if(r.left!=null)
+         {
+             levelOrder(r.left);
+         }
+          if(r.right!=null)
+         {
+             levelOrder(r.right);
+         }
+         
+     }
+     
+     return root;
+ }
+     public static void main(String []args){
+         
+        TreeNode root = new TreeNode(1);
+        root.left= new TreeNode(2);
+        root.right= new TreeNode(3);
+        root.left.left= new TreeNode(4);
+        root.left.right= new TreeNode(5);
+        root.right.left= new TreeNode(10);
+        
+        TreeNode b = mirror(root);
+        System.out.println("Binary tree");
+        levelOrder(b);
+
+         
+     }
+}

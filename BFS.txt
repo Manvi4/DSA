@@ -1,0 +1,67 @@
+Breadth-First Search (BFS) is a tree or graph traversal technique that explores nodes level by level, starting from the root (or source) and visiting all its neighbors before moving on to the next level.
+
+Unlike DFS, which uses a stack (or recursion), BFS uses a queue to handle the traversal in a First-In-First-Out (FIFO) manner.
+
+/* Online Java Compiler and Editor */
+import java.util.Queue; 
+import java.util.LinkedList; 
+class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    public TreeNode(int val)
+    {
+        this.val=val;
+        this.left=null;
+        this.right=null;
+    }
+}
+
+public class Bfs{
+  
+  public void bfsImplementation(TreeNode root){
+      
+      if(root==null)
+      return;
+      
+      Queue<TreeNode> queue= new LinkedList<>();
+      queue.add(root);
+      
+      while(!queue.isEmpty())
+      {
+          TreeNode current= queue.poll();
+          System.out.println(current.val);
+          
+          
+          if(current.left!=null)
+          {
+              queue.add(current.left);
+          }
+          if(current.right!=null)
+          {
+              queue.add(current.right);
+          }
+          
+          
+      }
+      
+      
+  }
+
+     public static void main(String []args){
+         
+         TreeNode root= new TreeNode(1);
+         root.left=new TreeNode(2);
+         root.right=new TreeNode(3);
+         root.left.left=new TreeNode(4);
+         root.left.right=new TreeNode(5);
+         root.right.left=new TreeNode(6);
+         root.right.right=new TreeNode(7);
+         Bfs b= new Bfs();
+         b.bfsImplementation(root);
+         
+         
+        System.out.println("BFS implementation");
+     }
+}
