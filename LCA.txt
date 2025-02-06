@@ -1,0 +1,54 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+
+
+    public  TreeNode LCA(TreeNode root,int p,int q)
+    {
+// Base case: if root is null or matches one of the target nodes
+        if(root==null||root.val==p||root.val==q){
+            return root;
+        }
+        TreeNode left= LCA(root.left,p,q);
+        TreeNode right= LCA(root.right,p,q);
+        
+ // If both left and right are non-null, root is the LCA
+        if(left!=null&&right!=null)
+        {
+            return root;
+        }
+// Otherwise, return the non-null child, Example take 2 and 6, we could not reach 6 so right is null. so lca is 2 which was left
+        return left!=null ? left:right;
+        
+    }
+     public static void main(String []args){
+         
+         TreeNode node= new TreeNode(1);
+         node.left= new TreeNode(2);
+         node.right= new TreeNode(3);
+         node.left.left= new TreeNode(4);
+         node.left.right= new TreeNode(5);
+         node.left.right.right= new TreeNode(6);
+         node.left.right= new TreeNode(5);
+
+         node.right.left= new TreeNode(10);
+         
+         HelloWorld h= new HelloWorld();
+         TreeNode lca= h.LCA(node,2,6);
+         System.out.println(lca.val);
+
+         
+
+     }
+}

@@ -1,0 +1,89 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+    static TreeNode predecessor= null;
+     static TreeNode successor= null;
+      public static void predecessorAndSuccessor(TreeNode root,int key)
+      {
+          if(root==null)
+          {
+              return;
+          }
+//if key is equal to root value we will get predecessor in left and successor in right
+         if(root.val==key)
+         {
+             if(root.left!=null)
+             {
+                 TreeNode temp= root.left;
+                 //get the maximum value from left
+                 while(temp.right!=null)
+                 {
+                     temp=temp.right;
+                 }
+                 predecessor=temp;
+             }
+             if(root.right!=null)
+             {
+                 TreeNode temp= root.right;
+                 //get the minimum value from right
+                 while(temp.left!=null)
+                 {
+                     temp=temp.left;
+                 }
+                 successor= temp;
+             }
+         }
+         if(key<root.val)
+         {
+             //if key is less than root then successor is root
+             successor=root;
+             predecessorAndSuccessor(root.left,key);
+             
+         }
+          if(key>root.val)
+         {
+             //if key is greater than root then predecessor is root
+             predecessor=root;
+             predecessorAndSuccessor(root.right,key);
+         }
+         
+      }
+
+      
+    
+   
+     public static void main(String []args){
+         
+      
+         TreeNode node= new TreeNode(14);
+         node.left= new TreeNode(11);
+         node.right= new TreeNode(17);
+         node.left.left= new TreeNode(10);
+         node.left.right= new TreeNode(9);
+         node.right.left= new TreeNode(16);
+         node.right.right= new TreeNode(18);
+
+
+
+         HelloWorld h= new HelloWorld();
+         int key=17;
+         h.predecessorAndSuccessor(node, key);
+          System.out.println("Inorder Predecessor of " + key + ": " +
+                (predecessor != null ? predecessor.val : "None"));
+        System.out.println("Inorder Successor of " + key + ": " +
+                (successor != null ? successor.val : "None"));
+
+
+     }
+}

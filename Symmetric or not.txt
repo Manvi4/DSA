@@ -1,0 +1,62 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+    
+    //we will check whether the left and right subtrees are mirror of each other.
+public boolean isSysmmetry(TreeNode root)
+{
+    if(root==null)
+    {
+        return true;
+    }
+    return isMirror(root.left, root.right);
+     
+}
+
+//created the method for root's left and right trees 
+    public  boolean isMirror(TreeNode left, TreeNode right)
+    {
+// Base case: if root is null then its symmetric
+        if(left==null&&right==null){
+            return true;
+        }
+        //if either of the left and right is null then not symmetric
+        if(left==null||right==null)
+        {
+            return false;
+        }
+        //check the values of left and right subtrees if they are mirror or not hence, Return true or false
+        return (left.val==right.val)&&isMirror(left.left,right.right)&&isMirror(left.right,right.left);
+        
+
+        
+    }
+     public static void main(String []args){
+         
+         TreeNode node= new TreeNode(1);
+         node.left= new TreeNode(2);
+         node.right= new TreeNode(2);
+         node.left.left= new TreeNode(3);
+         node.left.right= new TreeNode(4);
+         node.right.left= new TreeNode(4);
+         node.right.right= new TreeNode(3);
+
+         HelloWorld h= new HelloWorld();
+         boolean b= h.isSysmmetry(node);
+         System.out.println(b);
+
+         
+
+     }
+}

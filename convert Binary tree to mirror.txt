@@ -1,0 +1,65 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+    
+    //conert bt into its mirror where left will be replaced by right value
+
+    public static void Mirror(TreeNode node)
+    {
+// Base case: if root is null then return nothing
+        if(node==null){
+        return;
+        }
+        //traverse through left and right
+        Mirror(node.left);
+        Mirror(node.right);
+        
+        // Swap the left and right children
+        TreeNode t= node.left;
+        node.left=node.right;
+        node.right=t;
+        
+        
+    }
+   static void inOrder(TreeNode root)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        inOrder(root.left);
+        System.out.println(root.val);
+        inOrder(root.right);
+
+    }
+     public static void main(String []args){
+         
+         TreeNode node= new TreeNode(1);
+         node.left= new TreeNode(2);
+         node.right= new TreeNode(3);
+         node.left.left= new TreeNode(4);
+         node.left.right= new TreeNode(5);
+         node.right.left= new TreeNode(10);
+         node.right.right= new TreeNode(11);
+
+         HelloWorld h= new HelloWorld();
+         System.out.println("traversed in inorder");
+         inOrder(node);
+         System.out.println("traversed in inorder and after converting to mirror the tree looks like: ");
+         Mirror(node);
+         inOrder(node);
+         
+
+     }
+}

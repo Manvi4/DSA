@@ -1,0 +1,56 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+   //check if this binary tree is binary search tree
+   
+   public boolean ISBTBst(TreeNode root)
+   {
+       return IsBST(root,null,null);
+   }
+   //takin min and max to comare with 
+   public boolean IsBST(TreeNode root, Integer min, Integer max)
+   {
+       if(root==null)
+       {
+           return true;
+       }
+       if((min!=null&&min>=root.val)||(max!=null&&max<=root.val))
+       {
+           return false;
+       }
+     //  when in left, the root should be greater than left if it will give the condition(max!=null&&max<=root.val)) bcoz we have updated max as root value, now the current root is left value so false
+     // when in right , the root should be less than left if it will give the condition (min!=null&&min>=root.val) bcoz we have updated min as root value, now the current root is right value so false
+       return IsBST(root.left,min,root.val)&&IsBST(root.right,root.val,max);
+   }
+    
+        
+      
+    
+   
+     public static void main(String []args){
+         
+         TreeNode node= new TreeNode(12);
+         node.left= new TreeNode(8);
+         node.right= new TreeNode(14);
+         node.left.left= new TreeNode(6);
+         node.left.right= new TreeNode(9);
+         node.right.left= new TreeNode(13);
+
+
+         HelloWorld h= new HelloWorld();
+         boolean v=h.ISBTBst(node);
+         System.out.println(v);
+
+     }
+}

@@ -1,0 +1,59 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+    
+ private int c=0;
+ private int result=Integer.MAX_VALUE;
+ 
+ public int KthLarge(TreeNode root, int k)
+ {
+     kthLargestInorder(root,k);
+     return result;
+ }
+   public void kthLargestInorder(TreeNode root, int k)
+   {
+       if(root==null)
+       {
+           return;
+       }
+       //traverse the tree to the right because we'll get the largest value from right only in bst.
+       kthLargestInorder(root.right,k);
+       c++;
+       if(c==k)
+       {
+           result=root.val;
+           return;
+       }
+     //traverse the tree to the left because we'll get the smallest value from left only in bst.
+            kthLargestInorder(root.left,k);
+   }
+   
+     public static void main(String []args){
+         
+         TreeNode node= new TreeNode(14);
+         node.left= new TreeNode(11);
+         node.right= new TreeNode(17);
+         node.left.left= new TreeNode(10);
+         node.left.right= new TreeNode(9);
+         node.right.left= new TreeNode(16);
+         node.right.right= new TreeNode(18);
+
+
+
+         HelloWorld h= new HelloWorld();
+         int v=h.KthLarge(node,2);
+         System.out.println(v);
+
+     }
+}

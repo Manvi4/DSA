@@ -1,0 +1,78 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+   
+   public void preOrder(TreeNode root)
+   {
+       
+       if(root==null)
+       {
+           return;
+       }
+       System.out.println(root.val);
+       preOrder(root.left);
+       preOrder(root.right);
+
+   }
+    public void inOrder(TreeNode root)
+   {
+       
+       if(root==null)
+       {
+           return;
+       }
+       preOrder(root.left);
+       System.out.println(root.val);
+       preOrder(root.right);
+
+   }
+    public void postOrder(TreeNode root)
+   {
+       
+       if(root==null)
+       {
+           return;
+       }
+       preOrder(root.left);
+       preOrder(root.right);
+       System.out.println(root.val);
+
+
+   
+      }
+
+      
+    
+   
+     public static void main(String []args){
+         
+      
+         TreeNode node= new TreeNode(1);
+         node.left= new TreeNode(2);
+         node.right= new TreeNode(3);
+         node.left.left= new TreeNode(4);
+         node.left.right= new TreeNode(5);
+         node.right.left= new TreeNode(6);
+
+
+
+         HelloWorld h= new HelloWorld();
+         h.preOrder(node);
+         h.inOrder(node);
+         h.postOrder(node);
+         
+
+
+     }
+}

@@ -1,0 +1,49 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+
+private int maxDiameter = 0;
+    public  int diameter(TreeNode root)
+    {
+        int diameter= checkDiameter(root);
+        return diameter;
+    }
+    public  int checkDiameter(TreeNode root)
+    {
+        if(root==null){
+            return 0;
+        }
+        int left= checkDiameter(root.left);
+        int right= checkDiameter(root.right);
+
+         maxDiameter= Math.max(maxDiameter, left+right);
+        return 1+Math.max(left,right);
+        
+    }
+     public static void main(String []args){
+         
+         TreeNode node= new TreeNode(1);
+         node.left= new TreeNode(2);
+         node.right= new TreeNode(3);
+         node.left.left= new TreeNode(4);
+         node.left.right= new TreeNode(5);
+         node.right.left= new TreeNode(10);
+         HelloWorld h= new HelloWorld();
+         int diameter= h.diameter(node);
+         System.out.println(diameter);
+
+         
+
+     }
+}

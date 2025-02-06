@@ -1,0 +1,64 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+   
+   public void BFS(TreeNode root)
+   {
+       
+       if(root==null)
+       {
+           return;
+           
+       }
+       Queue<TreeNode> q= new LinkedList<>();
+       q.add(root);//1 is added
+       while(!q.isEmpty())
+       { 
+           //1 is taken out from queue and printed
+           TreeNode current= q.poll();
+           System.out.println(current.val);
+           
+           //adding the left of 1 in the queue
+           if(current.left!=null)
+           {
+               q.add(current.left);
+           }
+           //adding the right of 1 in the queue
+           if(current.right!=null)
+           {
+               q.add(current.right);
+           }
+       }
+      
+   }
+ 
+     public static void main(String []args){
+         
+      
+         TreeNode node= new TreeNode(1);
+         node.left= new TreeNode(2);
+         node.right= new TreeNode(3);
+         node.left.left= new TreeNode(4);
+         node.left.right= new TreeNode(5);
+         node.right.left= new TreeNode(6);
+
+
+
+         HelloWorld h= new HelloWorld();
+         h.BFS(node);
+         
+
+
+     }
+}

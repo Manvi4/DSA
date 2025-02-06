@@ -1,0 +1,59 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+ class TreeNode
+{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    public TreeNode(int val){
+        this.val= val;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class HelloWorld{
+    
+      public int sumTree(TreeNode root)
+      {
+          if(root==null)
+          {
+              return 0;
+          }
+          //traverse left and right subtrees
+          int left=sumTree(root.left);
+          int right=sumTree(root.right);
+          
+          //store the old value eg. 2 is root of 4 and 5 later we will add the root with left and right subtrees
+          int oldValue= root.val;
+          
+          //new root value is sum of left and right
+          root.val= left+right;
+          
+          return oldValue+root.val;
+      }
+
+       public void inOrderTraversal(TreeNode root) {
+        if (root == null) return;
+        inOrderTraversal(root.left);
+        System.out.print(root.val + " ");
+        inOrderTraversal(root.right);
+    }
+        
+   
+     public static void main(String []args){
+         
+         TreeNode node= new TreeNode(1);
+         node.left= new TreeNode(2);
+         node.right= new TreeNode(3);
+         node.left.left= new TreeNode(4);
+         node.left.right= new TreeNode(5);
+         node.right.left= new TreeNode(10);
+
+
+         HelloWorld h= new HelloWorld();
+         h.inOrderTraversal(node);
+         int v=h.sumTree(node);
+         h.inOrderTraversal(node);
+
+     }
+}
