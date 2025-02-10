@@ -1,0 +1,75 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+class TreeNode {
+    int data;
+    TreeNode left, right;
+
+    public TreeNode(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+class TreeNodeHD{
+    
+    TreeNode node;
+    int hd;
+    public TreeNodeHD(TreeNode node, int hd)
+    {
+        this.node = node;
+        this.hd = hd;
+    }
+}
+
+public class TopView{
+
+
+    public static void topView(TreeNode root)
+    {
+         if (root == null) {
+            return;
+        }
+         //treeMap stores the first node at each horizontal distance (for sorting by keys)
+        Map<Integer,Integer> map = new TreeMap<>();
+        // Queue for level-order traversal
+        Queue<TreeNodeHD> queue= new LinkedList<>();
+        queue.add(new TreeNodeHD(root,0));
+        while(!queue.isEmpty())
+        {
+            TreeNodeHD current= queue.poll();
+            int hd1= current.hd;
+            TreeNode node= current.node;
+     //update the map with the current node (overwritten to keep the bottommost node)
+     //eg. 123456, 1 and 5 has hd as 0 but we will take 5 not 1 this time because its the bottom value
+    
+                map.put(hd1,node.data);
+            
+            //Add the left and right children to the queue with updated horizontal distance
+            if(node.left!=null)
+            {
+                queue.add(new TreeNodeHD(node.left, hd1-1));
+            }
+            if(node.right!=null)
+            {
+                queue.add(new TreeNodeHD(node.right, hd1+1));
+            }
+        }
+         // Print the top view nodes in order of horizontal distance
+        for(int v:map.values())
+        {
+            System.out.println(v+ " ");
+        }
+    }
+     public static void main(String []args){
+
+       TreeNode node = new TreeNode(1);
+       node.left= new TreeNode(2);
+       node.right= new TreeNode(3);
+       node.left.left= new TreeNode(4);
+       node.left.right= new TreeNode(5);
+       node.right.left= new TreeNode(5);
+       node.right.right= new TreeNode(5);
+       topView(node);
+
+
+     }
+}

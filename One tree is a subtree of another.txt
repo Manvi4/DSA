@@ -1,0 +1,60 @@
+/* Online Java Compiler and Editor */
+class TreeNode {
+    int data;
+    TreeNode left, right;
+
+    public TreeNode(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class SubtreeChecker {
+
+    // Function to check if T2 is a subtree of T1
+    public static boolean isSubtree(TreeNode T1, TreeNode T2) {
+        // An empty tree is always a subtree
+        if (T2 == null) return true;
+
+        // If the main tree is empty but T2 is not, it's not a subtree
+        if (T1 == null) return false;
+
+        // Check if the trees are identical from this node
+        if (areIdentical(T1, T2)) return true;
+
+        // Check left and right subtrees
+        return isSubtree(T1.left, T2) || isSubtree(T1.right, T2);
+    }
+
+    // Helper function to check if two trees are identical
+    private static boolean areIdentical(TreeNode root1, TreeNode root2) {
+        // Both trees are empty
+        if (root1 == null && root2 == null) return true;
+
+        // One tree is empty, and the other is not
+        if (root1 == null || root2 == null) return false;
+
+        // Check if current nodes match and recurse for left and right children
+        return (root1.data == root2.data) &&
+                areIdentical(root1.left, root2.left) &&
+                areIdentical(root1.right, root2.right);
+    }
+
+    public static void main(String[] args) {
+        // Main binary tree (T1)
+        TreeNode T1 = new TreeNode(1);
+        T1.left = new TreeNode(2);
+        T1.right = new TreeNode(3);
+        T1.left.left = new TreeNode(4);
+        T1.left.right = new TreeNode(5);
+        T1.right.left = new TreeNode(6);
+        T1.right.right = new TreeNode(7);
+
+        // Subtree (T2)
+        TreeNode T2 = new TreeNode(3);
+        T2.left = new TreeNode(6);
+        T2.right = new TreeNode(7);
+
+        System.out.println("Is T2 a subtree of T1? " + isSubtree(T1, T2));
+    }
+}

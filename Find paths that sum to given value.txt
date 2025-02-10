@@ -1,0 +1,62 @@
+/* Online Java Compiler and Editor */
+import java.util.*; 
+
+class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    public TreeNode(int val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class PathSumFinder {
+
+    public static List<List<Integer>> findPaths(TreeNode root, int targetSum) {
+        List<List<Integer>> result = new ArrayList<>();
+        findPathsRecursive(root, targetSum, new ArrayList<>(), result);
+        return result;
+    }
+
+    private static void findPathsRecursive(TreeNode node, int remainingSum, List<Integer> currentPath, List<List<Integer>> result) {
+        if (node == null) return;
+
+        //add the current node to the path
+        currentPath.add(node.val);
+
+        //check if we reached a leaf node and the path sum equals the target sum
+        if (node.left == null && node.right == null && remainingSum == node.val) {
+            result.add(new ArrayList<>(currentPath));
+        } else {
+            // Continue the search on the left and right subtrees
+            findPathsRecursive(node.left, remainingSum - node.val, currentPath, result);
+            findPathsRecursive(node.right, remainingSum - node.val, currentPath, result);
+        }
+
+        // Backtracking ;remove the last added node to explore other paths
+        currentPath.remove(currentPath.size() - 1);
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(5);
+        root.left = new TreeNode(4);
+        root.right = new TreeNode(8);
+        root.left.left = new TreeNode(11);
+        root.left.left.left = new TreeNode(7);
+        root.left.left.right = new TreeNode(2);
+        root.right.left = new TreeNode(13);
+        root.right.right = new TreeNode(4);
+        root.right.right.left = new TreeNode(5);
+        root.right.right.right = new TreeNode(1);
+
+        int targetSum = 22;
+
+        List<List<Integer>> paths = findPaths(root, targetSum);
+        System.out.println("Paths that sum to " + targetSum + ":");
+        for (List<Integer> path : paths) {
+            System.out.println(path);
+        }
+    }
+}

@@ -1,0 +1,78 @@
+import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    public TreeNode(int val) {
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class Identical {
+
+    private static int postorderindex;
+
+    public static TreeNode InorPost(int[] inorder, int[] postorder, int instart, int inend) {
+        if (instart > inend) return null;
+
+        // Select the current root value from postorder traversal
+        TreeNode root = new TreeNode(postorder[postorderindex--]);
+
+        // If this is a leaf node, return it
+        if (instart == inend) return root;
+
+        // Find the index of this root in inorder traversal
+        int findrootbyindex = FindrootByIndex(inorder, instart, inend, root.val);
+
+        // Build right subtree first, then left subtree (due to postorder)
+        root.right = InorPost(inorder, postorder, findrootbyindex + 1, inend);
+        root.left = InorPost(inorder, postorder, instart, findrootbyindex - 1);
+
+        return root;
+    }
+
+    public static int FindrootByIndex(int[] inorder, int instart, int inend, int val) {
+        for (int i = instart; i <= inend; i++) {
+            if (inorder[i] == val) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static void levelOrderBinaryTree(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            System.out.print(current.val + " ");
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+            if (current.right != null) {
+                queue.add(current.right);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] inorder = {4, 2, 5, 1, 6, 3, 7};
+        int[] postorder = {4, 5, 2, 6, 7, 3, 1};
+
+        postorderindex = postorder.length - 1; // Initialize postorder index here
+
+        TreeNode root1 = InorPost(inorder, postorder, 0, inorder.length - 1);
+
+        System.out.println("Level Order Traversal of Constructed Tree:");
+        levelOrderBinaryTree(root1);
+    }
+}

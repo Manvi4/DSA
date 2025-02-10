@@ -1,0 +1,64 @@
+/* Online Java Compiler and Editor */
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    TreeNode(int val) {
+        this.val = val;
+        left = right = null;
+    }
+}
+
+public class BinaryTree {
+    
+    // Function to check if two trees are identical
+    public boolean isIdentical(TreeNode root1, TreeNode root2) {
+        if (root1 == null && root2 == null)
+            return true;
+        if (root1 == null || root2 == null)
+            return false;
+        
+        return (root1.val == root2.val) &&
+               isIdentical(root1.left, root2.left) &&
+               isIdentical(root1.right, root2.right);
+    }
+    
+    // to check if a binary tree is a subtree of another
+    public boolean isSubtree(TreeNode root1, TreeNode root2) {
+        if (root2 == null) // Empty tree is always a subtree
+            return true;
+        if (root1 == null) // If main tree is empty and subtree is not, then return false
+            return false;
+        
+        // If the trees are identical starting from the current node, then return true
+        if (isIdentical(root1, root2))
+            return true;
+        
+        // Otherwise, check if the subtree is a part of either left or right subtree of the root1
+        return isSubtree(root1.left, root2) || isSubtree(root1.right, root2);
+    }
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        
+        // Creating the first tree (main tree)
+        TreeNode root1 = new TreeNode(1);
+        root1.left = new TreeNode(2);
+        root1.right = new TreeNode(3);
+        root1.left.left = new TreeNode(4);
+        root1.left.right = new TreeNode(5);
+        
+        // Creating the second tree (subtree)
+        TreeNode root2 = new TreeNode(2);
+        root2.left = new TreeNode(4);
+        root2.right = new TreeNode(5);
+        
+        // Checking if root2 is a subtree of root1
+        if (tree.isSubtree(root1, root2)) {
+            System.out.println("root2 is a subtree of root1");
+        } else {
+            System.out.println("root2 is not a subtree of root1");
+        }
+    }
+}

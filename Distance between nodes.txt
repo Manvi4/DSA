@@ -1,0 +1,77 @@
+/* Online Java Compiler and Editor */
+class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    public TreeNode(int val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+}
+
+public class DistanceBetweenNodes {
+
+    // Find the Lowest Common Ancestor (LCA)
+    public static TreeNode findLCA(TreeNode root, int n1, int n2) {
+        if (root == null) return null;
+
+        // If either n1 or n2 matches the current node, return it
+        if (root.val == n1 || root.val == n2) {
+            return root;
+        }
+
+        // Search in left and right subtrees
+        TreeNode leftLCA = findLCA(root.left, n1, n2);
+        TreeNode rightLCA = findLCA(root.right, n1, n2);
+
+        // If both sides return non-null, this node is the LCA
+        if (leftLCA != null && rightLCA != null) {
+            return root;
+        }
+
+        // Otherwise, return the non-null result
+        return (leftLCA != null) ? leftLCA : rightLCA;
+    }
+
+    // Find the distance from a given node to a target value
+    public static int findDistanceFromLCA(TreeNode root, int target, int distance) {
+        if (root == null) return -1;
+
+        // If the current node matches the target, return the distance
+        if (root.val == target) return distance;
+
+        // Search in left and right subtrees
+        int leftDistance = findDistanceFromLCA(root.left, target, distance + 1);
+        if (leftDistance != -1) return leftDistance;
+
+        return findDistanceFromLCA(root.right, target, distance + 1);
+    }
+
+    // Main method to find the distance between two nodes
+    public static int findDistanceBetweenNodes(TreeNode root, int n1, int n2) {
+        TreeNode lca = findLCA(root, n1, n2);
+
+        if (lca == null) {
+            return -1; // Nodes are not present in the tree
+        }
+
+        int d1 = findDistanceFromLCA(lca, n1, 0);
+        int d2 = findDistanceFromLCA(lca, n2, 0);
+
+        return d1 + d2;
+    }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+
+        int n1 = 4, n2 = 7;
+        int distance = findDistanceBetweenNodes(root, n1, n2);
+        System.out.println("Distance between nodes " + n1 + " and " + n2 + ": " + distance);
+    }
+}
