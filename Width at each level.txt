@@ -26,10 +26,10 @@ public class BinaryTreeWidth {
         
         while (!queue.isEmpty()) {
             int levelWidth = queue.size(); // Number of nodes at the current level
-            System.out.println("Level " + level + ": " + levelWidth);
+            System.out.println("Level " + level + " " + levelWidth);
             level++;
 
-            // Traverse all nodes at this level and add their children from left to right 
+            //traverse all nodes at this level and add their children from left to right 
             for (int i = 0; i < levelWidth; i++) {
                 TreeNode current = queue.poll();
 
