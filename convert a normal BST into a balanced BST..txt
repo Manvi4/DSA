@@ -1,0 +1,73 @@
+/* Online Java Compiler and Editor */
+import java.util.ArrayList;
+
+class TreeNode {
+    int data;
+    TreeNode left, right;
+
+    public TreeNode(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class BSTBalancer {
+
+    //perform inorder traversal and then store the elements in a list
+    private static void inorderTraversal(TreeNode root, ArrayList<Integer> nodes) {
+        if (root == null) return;
+        inorderTraversal(root.left, nodes);
+        //adding nodes in a list
+        nodes.add(root.data);
+        inorderTraversal(root.right, nodes);
+    }
+
+    // Build a balanced BST from the sorted list
+    private static TreeNode buildBalancedBST(ArrayList<Integer> nodes, int start, int end) {
+        if (start > end) return null;
+
+      //in an unbalanced bt its very helpful to find the root so we get the bend
+        // Select the middle element as the root
+        int mid = (start + end) / 2;
+        TreeNode node = new TreeNode(nodes.get(mid));
+
+        //recursively build the left and right subtrees
+        //left will iterate before mid that is root in inorder
+        node.left = buildBalancedBST(nodes, start, mid - 1);
+        node.right = buildBalancedBST(nodes, mid + 1, end);
+
+        return node;
+    }
+
+    // Convert an unbalanced BST to a balanced BST
+    public static TreeNode convertToBalancedBST(TreeNode root) {
+        ArrayList<Integer> nodes = new ArrayList<>();
+        inorderTraversal(root, nodes);
+        return buildBalancedBST(nodes, 0, nodes.size() - 1);
+    }
+
+    // Helper function to print the tree in inorder
+    private static void printInorder(TreeNode root) {
+        if (root == null) return;
+        printInorder(root.left);
+        System.out.print(root.data + " ");
+        printInorder(root.right);
+    }
+
+    public static void main(String[] args) {
+        // Example: Unbalanced BST
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(5);
+        root.left.left = new TreeNode(1);
+        root.right = new TreeNode(20);
+        root.right.right = new TreeNode(30);
+
+        System.out.println("Inorder Traversal of Unbalanced BST:");
+        printInorder(root);
+
+        root = convertToBalancedBST(root);
+
+        System.out.println("\nInorder Traversal of Balanced BST:");
+        printInorder(root);
+    }
+}

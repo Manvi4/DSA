@@ -1,0 +1,75 @@
+/* Online Java Compiler and Editor */
+import java.util.LinkedList;
+import java.util.Queue;
+
+class TreeNode {
+    int data;
+    TreeNode left, right;
+
+    public TreeNode(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class CompleteBinaryTreeChecker {
+
+    public static boolean isCompleteBinaryTree(TreeNode root) {
+        if (root == null) return true;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean foundNull = false;  // Flag to track if we've encountered a null child
+
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+
+            // If we find a null node, all following nodes should also be null
+            if (current == null) {
+                foundNull = true;
+            } else {
+                // If we have already seen a null node before,then it's not a complete binary tree
+                if (foundNull) return false;
+
+                // if a left child is null but right child is not null. then, its not a complete binary tree.
+                if (current.left == null && current.right != null) {
+                    return false; // Right child exists but no left child → not a CBT
+                }
+
+                queue.add(current.left);
+                queue.add(current.right);
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        // Example 1: Complete Binary Tree
+        TreeNode root1 = new TreeNode(1);
+        root1.left = new TreeNode(2);
+        root1.right = new TreeNode(3);
+        root1.left.left = new TreeNode(4);
+        root1.left.right = new TreeNode(5);
+        root1.right.left = new TreeNode(6);
+
+        System.out.println(isCompleteBinaryTree(root1)); // true
+
+        // Example 2: Not a Complete Binary Tree (Right child without left child)
+        TreeNode root2 = new TreeNode(1);
+        root2.left = new TreeNode(2);
+        root2.right = new TreeNode(3);
+        root2.left.left = new TreeNode(4);
+        root2.left.right = new TreeNode(5);
+        root2.right.right = new TreeNode(6); // Missing left child of 3
+
+        System.out.println(isCompleteBinaryTree(root2)); // false
+
+        // Example 3: Not a Complete Binary Tree (Missing left child but has right child)
+        TreeNode root3 = new TreeNode(1);
+        root3.left = new TreeNode(2);
+        root3.right = new TreeNode(3);
+        root3.left.right = new TreeNode(5); // Missing left child of 2
+
+        System.out.println(isCompleteBinaryTree(root3)); // false
+    }
+}
