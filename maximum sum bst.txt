@@ -41,14 +41,13 @@ public class MaxSumBST {
         return new BSTInfo(false, 0, 0, 0);
     }
 
-    // Main function to find max sum BST
+    
     public static int maxSumBST(TreeNode root) {
         maxSum = 0;
         findMaxSumBST(root);
         return maxSum;
     }
 
-    // Driver Code
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(4);
