@@ -1,0 +1,62 @@
+/* Online Java Compiler and Editor */
+class TreeNode {
+    int data;
+    TreeNode left, right;
+
+    TreeNode(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+class BSTInfo {
+    boolean isBST;
+    int sum, min, max;
+
+    BSTInfo(boolean isBST, int sum, int min, int max) {
+        this.isBST = isBST;
+        this.sum = sum;
+        this.min = min;
+        this.max = max;
+    }
+}
+
+public class MaxSumBST {
+    static int maxSum = 0;
+
+    // Helper function to find the maximum sum BST subtree
+    private static BSTInfo findMaxSumBST(TreeNode root) {
+        if (root == null) return new BSTInfo(true, 0, Integer.MAX_VALUE, Integer.MIN_VALUE);
+
+        BSTInfo left = findMaxSumBST(root.left);
+        BSTInfo right = findMaxSumBST(root.right);
+
+        // Check if the current subtree is a BST
+        if (left.isBST && right.isBST && root.data > left.max && root.data < right.min) {
+            int sum = root.data + left.sum + right.sum;
+            maxSum = Math.max(maxSum, sum);
+            return new BSTInfo(true, sum, Math.min(root.data, left.min), Math.max(root.data, right.max));
+        }
+
+        return new BSTInfo(false, 0, 0, 0);
+    }
+
+    // Main function to find max sum BST
+    public static int maxSumBST(TreeNode root) {
+        maxSum = 0;
+        findMaxSumBST(root);
+        return maxSum;
+    }
+
+    // Driver Code
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(4);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(2);
+        root.left.right = new TreeNode(4);
+        root.right.right = new TreeNode(5);
+
+        System.out.println("Maximum Sum BST Subtree: " + maxSumBST(root));
+    }
+}

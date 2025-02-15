@@ -1,0 +1,84 @@
+/* Online Java Compiler and Editor */
+import java.util.*;
+
+class TreeNode {
+    int data;
+    TreeNode left, right;
+
+    TreeNode(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class MergeBSTs {
+    
+    // Perform Inorder Traversal and store in a list
+    private static void inorder(TreeNode root, List<Integer> list) {
+        if (root == null) return;
+        inorder(root.left, list);
+        list.add(root.data);
+        inorder(root.right, list);
+    }
+
+    // Merge two sorted lists into one
+    private static List<Integer> mergeLists(List<Integer> list1, List<Integer> list2) {
+        List<Integer> mergedList = new ArrayList<>();
+        int i = 0, j = 0;
+        while (i < list1.size() && j < list2.size()) {
+            if (list1.get(i) < list2.get(j)) 
+                mergedList.add(list1.get(i++));
+            else 
+                mergedList.add(list2.get(j++));
+        }
+        while (i < list1.size()) mergedList.add(list1.get(i++));
+        while (j < list2.size()) mergedList.add(list2.get(j++));
+        return mergedList;
+    }
+
+    // Convert a sorted list into a balanced BST
+    private static TreeNode sortedListToBST(List<Integer> list, int start, int end) {
+        if (start > end) return null;
+        int mid = (start + end) / 2;
+        TreeNode node = new TreeNode(list.get(mid));
+        node.left = sortedListToBST(list, start, mid - 1);
+        node.right = sortedListToBST(list, mid + 1, end);
+        return node;
+    }
+
+    // Merge two BSTs
+    public static TreeNode mergeBSTs(TreeNode root1, TreeNode root2) {
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+
+        inorder(root1, list1);
+        inorder(root2, list2);
+
+        List<Integer> mergedList = mergeLists(list1, list2);
+
+        return sortedListToBST(mergedList, 0, mergedList.size() - 1);
+    }
+
+    // Print Inorder Traversal of BST
+    private static void printInorder(TreeNode root) {
+        if (root == null) return;
+        printInorder(root.left);
+        System.out.print(root.data + " ");
+        printInorder(root.right);
+    }
+
+    public static void main(String[] args) {
+        TreeNode root1 = new TreeNode(3);
+        root1.left = new TreeNode(1);
+        root1.right = new TreeNode(5);
+
+        TreeNode root2 = new TreeNode(4);
+        root2.left = new TreeNode(2);
+        root2.right = new TreeNode(6);
+
+        TreeNode mergedRoot = mergeBSTs(root1, root2);
+        
+        System.out.println("Inorder Traversal of Merged BST:");
+        printInorder(mergedRoot);
+    }
+}

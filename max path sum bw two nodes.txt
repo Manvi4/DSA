@@ -1,0 +1,50 @@
+/* Online Java Compiler and Editor */
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    
+    TreeNode(int val) {
+        this.val = val;
+        this.left = this.right = null;
+    }
+}
+
+class Solution {
+    int maxPathSum = Integer.MIN_VALUE;
+
+    public int findMaxPathSum(TreeNode root) {
+        maxPathDown(root); 
+        return maxPathSum;// Return the maximum path sum found
+    }
+
+    private int maxPathDown(TreeNode root) {
+        if (root == null) return 0;
+
+        // Recursively find max sum paths from left and right subtrees, 0 to Ignore negative values 
+        int leftSum = Math.max(0, maxPathDown(root.left));   
+        int rightSum = Math.max(0, maxPathDown(root.right)); 
+
+        // Update the global max if a larger sum is found (including current node)
+        maxPathSum = Math.max(maxPathSum, leftSum + rightSum + root.val);
+
+        // Return the max path sum including the current node and one child, this is a path without bent, straight
+        return root.val + Math.max(leftSum, rightSum);
+    }
+}
+
+
+public class MaxPathSumBinaryTree {
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(10);
+        root.left.left = new TreeNode(20);
+        root.left.right = new TreeNode(1);
+        root.right.right = new TreeNode(-25);
+        root.right.right.left = new TreeNode(3);
+        root.right.right.right = new TreeNode(4);
+
+        Solution solution = new Solution();
+        System.out.println("Maximum Path Sum: " + solution.findMaxPathSum(root));
+    }
+}
